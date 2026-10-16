@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block body %}
+<header class="top">
+  <div class="wrap">
+    <a class="brandname" href="{% url 'site:home' %}">
+      {% if tenant.logo %}<img src="{{ tenant.logo.url }}" alt="" height="36">{% else %}<span class="mark">{{ tenant.name|slice:":1" }}</span>{% endif %}
+      {{ tenant.name }}
+    </a>
+    <nav><a href="{% url 'site:home' %}#services">Services</a><a href="{% url 'site:home' %}#branches">Branches</a><a href="{% url 'dashboard:home' %}">Staff login</a></nav>
+  </div>
+</header>
+{% block content %}{% endblock %}
+<footer class="foot">
+  <div class="wrap">
+    <span>© {% now "Y" %} {{ tenant.name }} · {{ tenant.city }}, Kenya{% if tenant.contact_phone %} · {{ tenant.contact_phone }}{% endif %}</span>
+    {% if tenant.show_powered_by %}<span>Powered by <b>{{ platform_name }}</b></span>{% endif %}
+  </div>
+</footer>
+{% endblock %}

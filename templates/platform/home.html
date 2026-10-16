@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block body %}
+<header class="top"><div class="wrap"><span class="brandname"><span class="mark">{{ platform_name|slice:":1" }}</span>{{ platform_name }}</span><nav><a href="/admin/">Platform console</a></nav></div></header>
+<section class="hero"><div class="wrap">
+  <h1>Booking and business software for spas, salons and barbers</h1>
+  <p class="muted">{{ tenant_count }} business{{ tenant_count|pluralize:"es" }} run on {{ platform_name }}, each under its own name.</p>
+</div></section>
+<main class="wrap">
+  <div class="grid">
+    {% for plan in plans %}
+    <div class="card"><h3 style="margin-top:0">{{ plan.name }}</h3><p><b>KES {{ plan.monthly_price_kes|intcomma }}</b> a month</p>
+      <p class="muted">{% if plan.max_branches %}{{ plan.max_branches }} branch{{ plan.max_branches|pluralize:"es" }}{% else %}Unlimited branches{% endif %} ·
+      {% if plan.max_staff %}{{ plan.max_staff }} staff{% else %}unlimited staff{% endif %}{% if plan.allows_custom_domain %} · own domain{% endif %}{% if plan.allows_white_label %} · full white-label{% endif %}</p></div>
+    {% endfor %}
+  </div>
+</main>
+{% endblock %}

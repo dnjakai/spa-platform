@@ -1,0 +1,36 @@
+{% extends "dashboard/base_dashboard.html" %}
+{% load humanize %}
+{% block content %}
+{% if tenant.status == "trial" %}<ul class="messages"><li>Free trial until {{ tenant.trial_ends_on|date:"j M Y" }}.</li></ul>{% endif %}
+<div class="tiles">
+  <div class="card tile"><span class="muted">Bookings today</span><b>{{ bookings|length }}</b></div>
+  <div class="card tile"><span class="muted">Upcoming</span><b>{{ upcoming_count }}</b></div>
+  <div class="card tile"><span class="muted">Taken today</span><b>KES {{ taken_today|intcomma }}</b></div>
+  {% for label, used, limit in usage %}
+  <div class="card tile"><span class="muted">{{ label }}</span><b>{{ used }}{% if limit %} / {{ limit }}{% endif %}</b>
+    {% if limit %}<div class="meter"><i style="width:{% widthratio used limit 100 %}%"></i></div>{% else %}<span class="muted">Unlimited</span>{% endif %}</div>
+  {% endfor %}
+</div>
+<div class="card">
+  <h2 style="margin-top:0">Today's appointments</h2>
+  <div class="tbl"><table>
+    <tr><th>Time</th><th>Client</th><th>Service</th><th>Branch</th><th>Status</th><th></th></tr>
+    {% for b in bookings %}
+    <tr>
+      <td>{{ b.start|time:"H:i" }}</td>
+      <td>{{ b.customer.name }}<br><span class="muted">{{ b.customer.phone }}</span></td>
+      <td>{{ b.service.name }}</td>
+      <td>{{ b.branch.name }}</td>
+      <td><span class="pill {{ b.status }}">{{ b.get_status_display }}</span></td>
+      <td class="actions">
+        {% if b.status == "pending_payment" %}{% include "dashboard/_action.html" with ref=b.ref action="confirm" label="Confirm" %}{% endif %}
+        {% if b.status == "confirmed" %}{% include "dashboard/_action.html" with ref=b.ref action="arrive" label="Check in" %}{% include "dashboard/_action.html" with ref=b.ref action="no_show" label="No-show" %}{% endif %}
+        {% if b.status == "arrived" %}{% include "dashboard/_action.html" with ref=b.ref action="complete" label="Complete" %}{% endif %}
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="6" class="muted">No appointments today. Share your booking link: <a href="{% url 'site:home' %}">{{ request.get_host }}</a></td></tr>
+    {% endfor %}
+  </table></div>
+</div>
+{% endblock %}

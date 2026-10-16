@@ -1,0 +1,5 @@
+Django>=5.2,<6.0
+# PostgreSQL in production (DATABASE_URL=postgres://...)
+psycopg[binary]>=3.2
+# Production web server
+gunicorn>=23.0

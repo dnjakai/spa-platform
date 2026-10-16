@@ -1,0 +1,15 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% if tenant %}{{ tenant.name }}{% else %}{{ platform_name }}{% endif %}{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&family=Lora:wght@600&display=swap">
+  <link rel="stylesheet" href="{% static 'app.css' %}">
+  <style>:root { --brand: {{ brand_color }}; }</style>
+</head>
+<body class="{% if tenant.font_style == 'classic' %}classic{% endif %}">
+  {% block body %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,24 @@
+{% extends "site/base_site.html" %}
+{% load humanize %}
+{% block title %}Book {{ service.name }} · {{ tenant.name }}{% endblock %}
+{% block content %}
+<main class="wrap">
+  <p><a href="{% url 'site:home' %}">← All services</a></p>
+  <div class="split">
+    <div class="card">
+      <h1 style="margin-top:0">{{ service.name }}</h1>
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {{ form.as_p }}
+        <button class="btn" type="submit">Book and pay KES {{ service.deposit_kes|intcomma }} deposit</button>
+      </form>
+    </div>
+    <aside class="card">
+      <p><b>KES {{ service.price_kes|intcomma }}</b> · {{ service.duration_minutes }} minutes</p>
+      <p class="muted">You pay a {{ service.deposit_percent }}% deposit (KES {{ service.deposit_kes|intcomma }}) by M-Pesa now and the balance at {{ tenant.name }}.</p>
+      <p class="muted">The payment goes straight to {{ tenant.name }}.</p>
+    </aside>
+  </div>
+</main>
+{% endblock %}

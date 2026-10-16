@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block body %}
+<header class="top">
+  <div class="wrap">
+    <a class="brandname" href="{% url 'dashboard:home' %}"><span class="mark">{{ tenant.name|slice:":1" }}</span>{{ tenant.name }} <span class="muted" style="font-weight:600;font-size:.85rem">· {{ tenant.plan.name }} plan</span></a>
+    <nav>
+      <a href="{% url 'dashboard:home' %}">Today</a>
+      <a href="{% url 'dashboard:branding' %}">Branding</a>
+      <a href="{% url 'site:home' %}" target="_blank">Booking site</a>
+      <form method="post" action="{% url 'logout' %}" style="display:inline">{% csrf_token %}<button class="btn ghost sm" style="margin-left:16px">Sign out</button></form>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  {% if messages %}<ul class="messages">{% for m in messages %}<li>{{ m }}</li>{% endfor %}</ul>{% endif %}
+  {% block content %}{% endblock %}
+</main>
+{% endblock %}

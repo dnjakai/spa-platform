@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block body %}
+<main class="wrap" style="padding-top:64px;max-width:460px">
+  <div class="card">
+    <p class="brandname"><span class="mark">{{ tenant.name|slice:":1" }}</span>{{ tenant.name }}</p>
+    <h1 style="font-size:1.4rem">Staff sign-in</h1>
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      {{ form.as_p }}
+      <input type="hidden" name="next" value="{{ next }}">
+      <button class="btn" type="submit">Sign in</button>
+    </form>
+    <p class="muted" style="font-size:.85rem;margin-top:14px">Your username is your email address.</p>
+  </div>
+</main>
+{% endblock %}

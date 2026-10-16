@@ -1,0 +1,20 @@
+{% extends "dashboard/base_dashboard.html" %}
+{% block content %}
+<div class="split">
+  <div class="card">
+    <h2 style="margin-top:0">Branding</h2>
+    <form method="post" enctype="multipart/form-data" novalidate>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn" type="submit">Save branding</button>
+    </form>
+  </div>
+  <aside class="card">
+    <h3 style="margin-top:0">Your web addresses</h3>
+    {% for d in tenant.domains.all %}
+      <p><span class="mono">{{ d.domain }}</span>{% if d.is_primary %} · primary{% endif %}{% if d.is_custom and not d.verified_at %} · <span class="muted">waiting for DNS check</span>{% endif %}</p>
+    {% endfor %}
+    <p class="muted">{% if tenant.show_powered_by %}"Powered by {{ platform_name }}" shows in your site footer. The Business plan removes it.{% else %}Full white-label is on.{% endif %}</p>
+  </aside>
+</div>
+{% endblock %}

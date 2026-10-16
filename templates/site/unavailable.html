@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block body %}
+<main class="wrap" style="padding-top:64px">
+  <div class="card">
+    <h1>{{ tenant.name }} isn't taking online bookings right now</h1>
+    <p class="muted">Please contact the business directly{% if tenant.contact_phone %} on {{ tenant.contact_phone }}{% endif %}.</p>
+  </div>
+</main>
+{% endblock %}

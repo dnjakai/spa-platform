@@ -1,0 +1,15 @@
+{% extends "site/base_site.html" %}
+{% load humanize %}
+{% block content %}
+<main class="wrap">
+  {% if messages %}<ul class="messages">{% for m in messages %}<li>{{ m }}</li>{% endfor %}</ul>{% endif %}
+  <div class="card">
+    <p class="muted">Booking {{ booking.ref }}</p>
+    <h1 style="margin-top:0">Thanks, {{ booking.customer.name }}.</h1>
+    <p><b>{{ booking.service.name }}</b> at {{ booking.branch.name }}, {{ booking.start|date:"l j F" }} at {{ booking.start|time:"H:i" }}.</p>
+    <p>Status: <span class="pill {{ booking.status }}">{{ booking.get_status_display }}</span></p>
+    <p class="muted">Deposit KES {{ booking.deposit_kes|intcomma }} · balance of KES {{ booking.balance_kes|intcomma }} paid at {{ booking.branch.name }}.</p>
+    <a class="btn ghost" href="{% url 'site:home' %}">Back to {{ tenant.name }}</a>
+  </div>
+</main>
+{% endblock %}

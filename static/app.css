@@ -1,0 +1,48 @@
+/* Shared styles. --brand is set per business in base.html from Tenant.brand_color. */
+:root { --ink:#1b1d22; --muted:#5d616b; --line:#e2e2dc; --bg:#f7f6f3; --surface:#fff; --good:#23794a; --warn:#a35b00; --bad:#b3352d; }
+* { box-sizing: border-box; }
+body { margin:0; font-family: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif; color:var(--ink); background:var(--bg); line-height:1.5; }
+a { color: var(--brand); }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+.top { background: var(--surface); border-bottom: 1px solid var(--line); }
+.top .wrap { display:flex; align-items:center; justify-content:space-between; gap:16px; padding-block:14px; flex-wrap:wrap; }
+.brandname { display:flex; align-items:center; gap:10px; font-weight:700; font-size:1.15rem; color:var(--ink); text-decoration:none; }
+.mark { width:36px; height:36px; border-radius:9px; background:var(--brand); color:#fff; display:grid; place-items:center; font-weight:700; }
+.classic h1, .classic h2, .classic .brandname { font-family: "Lora", Georgia, serif; }
+nav a { margin-left: 16px; text-decoration:none; color:var(--muted); font-weight:600; }
+.hero { padding: 48px 0 32px; background: linear-gradient(0deg, var(--bg), color-mix(in srgb, var(--brand) 14%, var(--bg))); }
+.hero h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin:0 0 8px; max-width: 22ch; }
+.muted { color: var(--muted); }
+main.wrap, main { padding-top: 28px; padding-bottom: 56px; }
+.grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.card { background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:18px; }
+.svc { display:flex; flex-direction:column; gap:6px; }
+.svc .row { display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:8px; }
+.btn { display:inline-block; background:var(--brand); color:#fff; border:0; border-radius:9px; padding:10px 16px; font-weight:700; text-decoration:none; cursor:pointer; font: inherit; font-weight:700; }
+.btn.ghost { background:transparent; color:var(--brand); border:1px solid var(--line); }
+.btn.sm { padding:5px 10px; font-size:.85rem; }
+form p { margin: 0 0 14px; }
+label { display:block; font-weight:600; font-size:.9rem; margin-bottom:4px; }
+input:not([type=checkbox]):not([type=color]), select, textarea { width:100%; padding:9px 11px; border:1px solid var(--line); border-radius:8px; font:inherit; background:#fff; }
+input[type=checkbox] { margin-right: 8px; }
+.helptext { display:block; color:var(--muted); font-size:.82rem; }
+.errorlist { color: var(--bad); margin: 4px 0; padding-left: 18px; font-size:.88rem; }
+.messages { list-style:none; padding:0; margin:0 0 16px; }
+.messages li { background:var(--surface); border-left:4px solid var(--brand); padding:10px 14px; border-radius:6px; margin-bottom:8px; }
+table { width:100%; border-collapse:collapse; font-size:.92rem; }
+th, td { text-align:left; padding:9px 8px; border-bottom:1px solid var(--line); vertical-align:middle; }
+th { font-size:.74rem; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); }
+.tbl { overflow-x:auto; }
+.pill { font-size:.75rem; font-weight:700; padding:2px 9px; border-radius:99px; background:#eceae4; white-space:nowrap; }
+.pill.confirmed, .pill.completed { background:#dcf0e3; color:var(--good); }
+.pill.pending_payment, .pill.arrived { background:#f8e9d0; color:var(--warn); }
+.pill.no_show, .pill.cancelled { background:#f7dedb; color:var(--bad); }
+.tiles { display:grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap:12px; margin-bottom:18px; }
+.tile b { display:block; font-size:1.5rem; font-variant-numeric: tabular-nums; }
+.meter { height:8px; background:#eceae4; border-radius:99px; overflow:hidden; margin-top:6px; }
+.meter i { display:block; height:100%; background:var(--brand); }
+.foot { border-top:1px solid var(--line); padding:16px 0; font-size:.85rem; color:var(--muted); }
+.foot .wrap { display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+.actions form { display:inline; }
+.split { display:grid; grid-template-columns: 1.5fr 1fr; gap:16px; }
+@media (max-width: 760px) { .split { grid-template-columns: 1fr; } nav a { margin-left: 10px; } }

@@ -1,0 +1,28 @@
+{% extends "site/base_site.html" %}
+{% load humanize %}
+{% block content %}
+<section class="hero">
+  <div class="wrap">
+    <h1>{{ tenant.tagline|default:tenant.name }}</h1>
+    <p class="muted">{{ branches|length }} branch{{ branches|length|pluralize:"es" }} · Pay your deposit by M-Pesa · Reminders by SMS</p>
+  </div>
+</section>
+<main class="wrap">
+  <h2 id="services">Services</h2>
+  <div class="grid">
+    {% for s in services %}
+    <article class="card svc">
+      <b>{{ s.name }}</b>
+      {% if s.description %}<span class="muted">{{ s.description }}</span>{% endif %}
+      <div class="row"><span>KES {{ s.price_kes|intcomma }} · {{ s.duration_minutes }} min</span><a class="btn sm" href="{% url 'site:book' s.pk %}">Book</a></div>
+    </article>
+    {% empty %}<p class="muted">No services are listed yet.</p>{% endfor %}
+  </div>
+  <h2 id="branches" style="margin-top:32px">Branches</h2>
+  <div class="grid">
+    {% for b in branches %}
+    <div class="card"><b>{{ b.name }}</b><br><span class="muted">{{ b.address|default:b.city }} · {{ b.opens_at|time:"H:i" }}–{{ b.closes_at|time:"H:i" }}</span></div>
+    {% endfor %}
+  </div>
+</main>
+{% endblock %}
